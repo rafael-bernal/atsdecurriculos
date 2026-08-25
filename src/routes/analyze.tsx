@@ -11,9 +11,9 @@ import { analyzeResume } from "@/lib/cvmatch/engine";
 import { useSession } from "@/lib/cvmatch/session";
 import type { AnalysisType } from "@/lib/cvmatch/types";
 
-const title = "Analyze Your Resume — CVMatch AI";
+const title = "Analise Seu Currículo — CVMatch AI";
 const description =
-  "Paste your resume, choose your analysis, optionally add a job description and get your ATS score, match score and an optimized resume. Free, no account.";
+  "Cole seu currículo, escolha sua análise, adicione opcionalmente uma descrição de vaga e obtenha sua pontuação de ATS, pontuação de compatibilidade e um currículo otimizado. Grátis, sem necessidade de conta.";
 
 export const Route = createFileRoute("/analyze")({
   head: () => ({
@@ -65,9 +65,9 @@ function AnalyzePage() {
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-12 sm:px-8 sm:py-16">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold sm:text-4xl">Analyze Your Resume</h1>
+          <h1 className="text-3xl font-bold sm:text-4xl">Analise Seu Currículo</h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Find out what is working, what is missing, and how to improve your resume.
+            Descubra o que está funcionando, o que está faltando e como melhorar seu currículo.
           </p>
         </header>
 
@@ -105,7 +105,7 @@ function AnalyzePage() {
               className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
               onClick={() => setStep("resume")}
             >
-              Back to my resume
+              Voltar para meu currículo
             </button>
           </div>
         )}

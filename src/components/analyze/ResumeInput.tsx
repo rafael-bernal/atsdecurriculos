@@ -18,7 +18,7 @@ export function ResumeInput({
     <section className="card-surface p-6 sm:p-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <label htmlFor="resume" className="font-display text-lg font-semibold">
-          Your Resume
+          Seu Currículo
         </label>
         <Button
           variant="ghost"
@@ -28,7 +28,7 @@ export function ResumeInput({
           disabled={!value}
         >
           <Trash2 className="size-4" />
-          Clear
+          Limpar
         </Button>
       </div>
 
@@ -36,30 +36,30 @@ export function ResumeInput({
         id="resume"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Paste your complete resume here..."
+        placeholder="Cole aqui o texto completo do seu currículo..."
         className="mt-4 min-h-[320px] resize-y rounded-2xl border-border bg-surface p-4 text-sm leading-relaxed focus-visible:ring-primary/30"
       />
 
       <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
-        <span>No upload required. Simply paste the text of your resume.</span>
+        <span>Não é necessário enviar arquivos. Basta colar o texto do seu currículo.</span>
         <span className="tabular-nums">
-          {value.length.toLocaleString()} characters · {words.toLocaleString()} words
+          {value.length.toLocaleString()} caracteres · {words.toLocaleString()} palavras
         </span>
       </div>
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
         <p className="flex items-center gap-2 text-xs text-muted-foreground">
           <Lock className="size-3.5 text-primary" />
-          Your resume is only used to generate your analysis.
+          Seu currículo é usado apenas para gerar sua análise.
         </p>
         <Button onClick={onContinue} disabled={!ready} className="h-11 rounded-full px-6">
-          Continue
+          Continuar
           <ArrowRight className="size-4" />
         </Button>
       </div>
       {!ready && value.length > 0 && (
         <p className="mt-3 text-xs text-warning">
-          Add a bit more of your resume (at least ~40 words) for a meaningful analysis.
+          Adicione um pouco mais do seu currículo (pelo menos ~40 palavras) para uma análise significativa.
         </p>
       )}
     </section>

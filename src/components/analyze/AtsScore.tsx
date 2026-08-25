@@ -5,7 +5,7 @@ export function AtsScore({ result }: { result: AnalysisResult }) {
   return (
     <section className="card-surface p-6 sm:p-8">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="font-display text-xl font-semibold">ATS Compatibility</h2>
+        <h2 className="font-display text-xl font-semibold">Compatibilidade com ATS</h2>
         <span className="font-display text-2xl font-bold tabular-nums text-primary">
           {result.atsScore}%
         </span>
@@ -18,8 +18,8 @@ export function AtsScore({ result }: { result: AnalysisResult }) {
       </div>
 
       <p className="mt-7 rounded-xl bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
-        Your resume has a strong ATS-friendly structure, but there are opportunities to improve its
-        relevance for this specific position.
+        Seu currículo tem uma estrutura forte e compatível com ATS, mas há oportunidades para
+        melhorar sua relevância para esta vaga específica.
       </p>
     </section>
   );

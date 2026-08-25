@@ -19,13 +19,13 @@ export function JobDescriptionInput({
   canAnalyze: boolean;
 }) {
   const options = [
-    { label: "Yes, analyze a specific job", value: true },
-    { label: "No, just analyze my resume", value: false },
+    { label: "Sim, quero analisar uma vaga específica", value: true },
+    { label: "Não, apenas analisar meu currículo", value: false },
   ];
 
   return (
     <section className="card-surface p-6 sm:p-8">
-      <h2 className="font-display text-lg font-semibold">Are you applying for a specific job?</h2>
+      <h2 className="font-display text-lg font-semibold">Você está se candidatando a uma vaga específica?</h2>
 
       <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
         {options.map((o) => (
@@ -47,17 +47,17 @@ export function JobDescriptionInput({
       {hasJob === true && (
         <div className="mt-6 animate-rise">
           <label htmlFor="jd" className="text-sm font-semibold">
-            Job Description
+            Descrição da vaga
           </label>
           <Textarea
             id="jd"
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            placeholder="Paste the complete job description here..."
+            placeholder="Cole aqui a descrição completa da vaga..."
             className="mt-3 min-h-[240px] resize-y rounded-2xl border-border bg-surface p-4 text-sm leading-relaxed focus-visible:ring-primary/30"
           />
           <p className="mt-2 text-xs text-muted-foreground tabular-nums">
-            {value.trim() ? value.trim().split(/\s+/).length.toLocaleString() : 0} words
+            {value.trim() ? value.trim().split(/\s+/).length.toLocaleString() : 0} palavras
           </p>
         </div>
       )}
@@ -66,7 +66,7 @@ export function JobDescriptionInput({
         <div className="mt-7 flex justify-end">
           <Button onClick={onAnalyze} disabled={!canAnalyze} className="h-11 rounded-full px-6">
             <Sparkles className="size-4" />
-            {hasJob ? "Compare Resume With Job" : "Analyze My Resume"}
+            {hasJob ? "Comparar Currículo com a Vaga" : "Analisar Meu Currículo"}
           </Button>
         </div>
       )}

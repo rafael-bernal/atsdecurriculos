@@ -3,24 +3,24 @@ import type { AnalysisType } from "@/lib/cvmatch/types";
 import { cn } from "@/lib/utils";
 
 const options: { id: AnalysisType; title: string; body: string }[] = [
-  { id: "ats", title: "ATS Analysis", body: "Evaluate ATS compatibility." },
+  { id: "ats", title: "Análise de ATS", body: "Avalie a compatibilidade com sistemas ATS." },
   {
     id: "professional",
-    title: "Professional Analysis",
-    body: "Evaluate career positioning and professional presentation.",
+    title: "Análise Profissional",
+    body: "Avalie o posicionamento de carreira e a apresentação profissional.",
   },
   {
     id: "technical",
-    title: "Technical Analysis",
-    body: "Evaluate technical skills, tools, technologies, and qualifications.",
+    title: "Análise Técnica",
+    body: "Avalie habilidades técnicas, ferramentas, tecnologias e qualificações.",
   },
   {
     id: "writing",
-    title: "Writing Analysis",
-    body: "Evaluate clarity, grammar, structure, and professional communication.",
+    title: "Análise de Redação",
+    body: "Avalie clareza, gramática, estrutura e comunicação profissional.",
   },
-  { id: "keywords", title: "Keyword Analysis", body: "Identify relevant and missing keywords." },
-  { id: "complete", title: "Complete Analysis", body: "Run all available analyses." },
+  { id: "keywords", title: "Análise de Palavras-chave", body: "Identifique palavras-chave relevantes e ausentes." },
+  { id: "complete", title: "Análise Completa", body: "Execute todas as análises disponíveis." },
 ];
 
 export function AnalysisSelector({
@@ -41,8 +41,8 @@ export function AnalysisSelector({
 
   return (
     <section className="card-surface p-6 sm:p-8">
-      <h2 className="font-display text-lg font-semibold">What would you like to analyze?</h2>
-      <p className="mt-1 text-sm text-muted-foreground">Select one or more. You can change this later.</p>
+      <h2 className="font-display text-lg font-semibold">O que você gostaria de analisar?</h2>
+      <p className="mt-1 text-sm text-muted-foreground">Selecione uma ou mais opções. Você pode alterar isso depois.</p>
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {options.map((o) => {

@@ -2,10 +2,10 @@ import { ScoreRing } from "@/components/analyze/ScoreRing";
 import { StatTile } from "@/components/analyze/StatTile";
 
 const bars = [
-  { label: "Experience", value: 88 },
-  { label: "Technical Skills", value: 81 },
-  { label: "Keywords", value: 76 },
-  { label: "ATS Structure", value: 92 },
+  { label: "Experiência", value: 88 },
+  { label: "Habilidades Técnicas", value: 81 },
+  { label: "Palavras-chave", value: 76 },
+  { label: "Estrutura ATS", value: 92 },
 ];
 
 export function DashboardPreview() {
@@ -14,17 +14,17 @@ export function DashboardPreview() {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            Analysis overview
+            Visão geral da análise
           </p>
-          <p className="mt-1 font-display text-lg font-semibold">Senior Data Analyst</p>
+          <p className="mt-1 font-display text-lg font-semibold">Analista de Dados Sênior</p>
         </div>
         <span className="rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary">
-          Live preview
+          Pré-visualização ao vivo
         </span>
       </div>
 
       <div className="mt-6 flex flex-col items-center gap-6 rounded-2xl bg-surface p-5 sm:flex-row">
-        <ScoreRing value={87} size={132} label="Job Match" />
+        <ScoreRing value={87} size={132} label="Compatibilidade com a Vaga" />
         <div className="w-full space-y-3">
           {bars.map((b) => (
             <div key={b.label}>
@@ -44,10 +44,10 @@ export function DashboardPreview() {
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatTile label="ATS Score" value="92%" />
-        <StatTile label="Keywords" value="24 / 28" />
-        <StatTile label="Requirements" value="18 / 22" />
-        <StatTile label="Improvements" value="6" tone="warning" />
+        <StatTile label="Pontuação ATS" value="92%" />
+        <StatTile label="Palavras-chave" value="24 / 28" />
+        <StatTile label="Requisitos" value="18 / 22" />
+        <StatTile label="Melhorias" value="6" tone="warning" />
       </div>
     </div>
   );

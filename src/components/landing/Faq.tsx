@@ -7,36 +7,36 @@ import {
 
 const faqs = [
   {
-    q: "What is an ATS?",
-    a: "An Applicant Tracking System is the software most companies use to receive, parse and rank applications. It reads your resume as structured text, which is why headings, wording and keywords matter as much as content.",
+    q: "O que é um ATS?",
+    a: "Um Sistema de Rastreamento de Candidatos é o software que a maioria das empresas usa para receber, analisar e classificar candidaturas. Ele lê seu currículo como texto estruturado, por isso cabeçalhos, redação e palavras-chave importam tanto quanto o conteúdo.",
   },
   {
-    q: "Do I need to upload my resume?",
-    a: "No. You simply paste the text of your resume. There is no file upload and no processing pipeline to wait for.",
+    q: "Preciso enviar meu currículo?",
+    a: "Não. Você simplesmente cola o texto do seu currículo. Não há upload de arquivo nem um processo de espera.",
   },
   {
-    q: "Can I analyze my resume for a specific job?",
-    a: "Yes. Paste the job description and CVMatch AI compares requirements, keywords and seniority signals against your resume to produce a match score.",
+    q: "Posso analisar meu currículo para uma vaga específica?",
+    a: "Sim. Cole a descrição da vaga e o CVMatch AI compara requisitos, palavras-chave e sinais de senioridade com seu currículo para gerar uma pontuação de compatibilidade.",
   },
   {
-    q: "Can CVMatch AI rewrite my resume?",
-    a: "It generates an optimized, ATS-friendly version based strictly on what you wrote. It improves wording, structure and clarity — it never invents companies, skills, degrees or achievements.",
+    q: "O CVMatch AI pode reescrever meu currículo?",
+    a: "Ele gera uma versão otimizada e compatível com ATS baseada estritamente no que você escreveu. Melhora a redação, a estrutura e a clareza — nunca inventa empresas, habilidades, formações ou conquistas.",
   },
   {
-    q: "Does CVMatch AI guarantee interviews?",
-    a: "CVMatch AI provides analysis and recommendations, but no tool can guarantee an interview or job offer.",
+    q: "O CVMatch AI garante entrevistas?",
+    a: "O CVMatch AI oferece análises e recomendações, mas nenhuma ferramenta pode garantir uma entrevista ou proposta de emprego.",
   },
   {
-    q: "Do I need to create an account?",
-    a: "No. The core product is completely usable without registration or login.",
+    q: "Preciso criar uma conta?",
+    a: "Não. O produto principal é totalmente utilizável sem cadastro ou login.",
   },
   {
-    q: "Can I analyze multiple jobs?",
-    a: "Yes. You can replace the job description and re-run the comparison as many times as you like within your session.",
+    q: "Posso analisar várias vagas?",
+    a: "Sim. Você pode substituir a descrição da vaga e refazer a comparação quantas vezes quiser durante sua sessão.",
   },
   {
-    q: "Is my resume information private?",
-    a: "Your resume stays in your browser session and is used only to generate your analysis. We do not ask for your email, phone number or any account credentials.",
+    q: "As informações do meu currículo são privadas?",
+    a: "Seu currículo permanece na sessão do seu navegador e é usado apenas para gerar sua análise. Não pedimos seu e-mail, telefone ou qualquer credencial de conta.",
   },
 ];
 
@@ -45,9 +45,9 @@ export function Faq() {
     <section id="faq" className="scroll-mt-20 border-t border-border bg-surface py-20 sm:py-28">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">FAQ</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Perguntas Frequentes</p>
           <h2 className="mt-3 text-balance-tight text-3xl font-bold sm:text-4xl">
-            Questions, answered honestly.
+            Perguntas, respondidas com honestidade.
           </h2>
         </div>
 

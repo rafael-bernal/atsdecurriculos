@@ -5,45 +5,45 @@ import { cn } from "@/lib/utils";
 
 const plans = [
   {
-    name: "Free",
-    price: "$0",
-    note: "No account required",
+    name: "Grátis",
+    price: "R$0",
+    note: "Sem necessidade de conta",
     features: [
-      "1 resume analysis",
-      "Basic ATS score",
-      "Basic recommendations",
-      "Job match score",
+      "1 análise de currículo",
+      "Pontuação ATS básica",
+      "Recomendações básicas",
+      "Pontuação de compatibilidade com a vaga",
     ],
-    cta: "Start Free",
+    cta: "Começar Grátis",
     featured: false,
   },
   {
     name: "Pro",
-    price: "$12",
-    note: "per month",
+    price: "R$59",
+    note: "por mês",
     features: [
-      "Unlimited resume analyses",
-      "Unlimited job comparisons",
-      "Advanced ATS analysis",
-      "AI resume optimization",
-      "Keyword analysis",
-      "Resume versions",
+      "Análises de currículo ilimitadas",
+      "Comparações de vagas ilimitadas",
+      "Análise ATS avançada",
+      "Otimização de currículo com IA",
+      "Análise de palavras-chave",
+      "Versões de currículo",
     ],
-    cta: "Start Pro",
+    cta: "Começar com o Pro",
     featured: true,
   },
   {
     name: "Premium",
-    price: "$24",
-    note: "per month",
+    price: "R$119",
+    note: "por mês",
     features: [
-      "Everything in Pro",
-      "Advanced career insights",
-      "Multiple resume versions",
-      "Advanced job targeting",
-      "Priority AI analysis",
+      "Tudo do plano Pro",
+      "Insights avançados de carreira",
+      "Múltiplas versões de currículo",
+      "Direcionamento avançado de vagas",
+      "Análise prioritária com IA",
     ],
-    cta: "Get Premium",
+    cta: "Obter o Premium",
     featured: false,
   },
 ];
@@ -53,12 +53,12 @@ export function Pricing() {
     <section id="pricing" className="scroll-mt-20 py-20 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Pricing</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Preços</p>
           <h2 className="mt-3 text-balance-tight text-3xl font-bold sm:text-4xl">
-            Simple plans for every stage of your job search.
+            Planos simples para cada etapa da sua busca por emprego.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            The core product is free to use right now — no account, no card, no setup.
+            O produto principal é gratuito para uso agora — sem conta, sem cartão, sem configuração.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export function Pricing() {
                 <h3 className="font-display text-lg font-semibold">{p.name}</h3>
                 {p.featured && (
                   <span className="rounded-full bg-primary-soft px-2.5 py-1 text-[11px] font-semibold text-primary">
-                    Most popular
+                    Mais popular
                   </span>
                 )}
               </div>
@@ -103,8 +103,8 @@ export function Pricing() {
         </div>
 
         <p className="mt-6 text-xs text-muted-foreground">
-          Paid plans are not active yet. Everything shown today runs free and anonymously in your
-          browser.
+          Os planos pagos ainda não estão ativos. Tudo o que é mostrado hoje funciona de forma gratuita e anônima no seu
+          navegador.
         </p>
       </div>
     </section>

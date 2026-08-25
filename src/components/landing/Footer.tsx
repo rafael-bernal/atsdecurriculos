@@ -1,16 +1,16 @@
 import { Logo } from "@/components/brand/Logo";
 
 const groups = [
-  { title: "Product", links: ["Features", "Pricing", "FAQ"] },
-  { title: "Legal", links: ["Privacy", "Terms"] },
+  { title: "Produto", links: ["Recursos", "Preços", "Perguntas Frequentes"] },
+  { title: "Legal", links: ["Privacidade", "Termos"] },
 ];
 
 const hrefs: Record<string, string> = {
-  Features: "/#features",
-  Pricing: "/#pricing",
-  FAQ: "/#faq",
-  Privacy: "/#faq",
-  Terms: "/#faq",
+  Recursos: "/#features",
+  Preços: "/#pricing",
+  "Perguntas Frequentes": "/#faq",
+  Privacidade: "/#faq",
+  Termos: "/#faq",
 };
 
 export function Footer() {
@@ -20,7 +20,7 @@ export function Footer() {
         <div className="sm:col-span-1">
           <Logo />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            AI-powered tools for stronger resumes and smarter job applications.
+            Ferramentas com IA para currículos mais fortes e candidaturas mais inteligentes.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export function Footer() {
       </div>
       <div className="border-t border-border px-5 py-6 sm:px-8">
         <p className="mx-auto w-full max-w-6xl text-xs text-muted-foreground">
-          © 2026 CVMatch AI. All rights reserved.
+          © 2026 CVMatch AI. Todos os direitos reservados.
         </p>
       </div>
     </footer>

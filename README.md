@@ -1,55 +1,56 @@
 # CVMatch AI
 
-> AI-powered resume analysis and ATS optimization platform.
+> Plataforma de análise e otimização de currículos com inteligência artificial.
 
-CVMatch AI is a web application designed to help job seekers analyze, improve, and optimize their resumes for Applicant Tracking Systems (ATS) and specific job opportunities.
+O **CVMatch AI** é uma aplicação web desenvolvida para ajudar candidatos a analisar, melhorar e otimizar seus currículos para sistemas ATS (Applicant Tracking Systems) e para vagas específicas.
 
-The platform allows users to paste their resume, choose the type of analysis they want, optionally add a job description, and receive personalized recommendations and an optimized resume.
+A plataforma permite que o usuário cole seu currículo, escolha o tipo de análise desejada e, opcionalmente, adicione uma descrição de vaga para comparar seu perfil com os requisitos da oportunidade.
 
-## 🚀 Live Demo
+## 🚀 Acesse o projeto
 
-👉 https://atsdecurriculos.lovable.app
+👉 **[CVMatch AI — Site](https://atsdecurriculos.lovable.app)**
 
-## 📌 Features
+## 📌 Funcionalidades
 
-- 📄 Resume analysis
-- 🤖 AI-powered recommendations
-- 🎯 ATS compatibility analysis
-- 📊 Resume-to-job matching
-- 🔑 Keyword analysis
-- 💼 Technical and professional analysis
-- ✍️ Resume optimization
-- 📋 Original vs. optimized resume comparison
-- 📥 Optimized resume download
-- 🚫 No registration or login required
+- 📄 Análise de currículo
+- 🤖 Recomendações com inteligência artificial
+- 🎯 Análise de compatibilidade com sistemas ATS
+- 📊 Comparação entre currículo e vaga
+- 🔑 Análise de palavras-chave
+- 💼 Análise técnica e profissional
+- ✍️ Otimização do currículo
+- 📋 Comparação entre currículo original e otimizado
+- 📥 Download do currículo otimizado
+- 🚫 Utilização sem cadastro ou login
 
-## 🧠 How It Works
+## 🧠 Como funciona
 
-The platform follows a simple workflow:
+A plataforma possui um fluxo simples:
 
-1. Paste your resume
-2. Choose the desired analysis
-3. Optionally paste a job description
-4. Analyze the resume
-5. Receive an ATS and job compatibility score
-6. Identify strengths and improvement areas
-7. Receive personalized recommendations
-8. Generate an optimized resume
-9. Copy or download the result
+1. Cole seu currículo
+2. Escolha o tipo de análise
+3. Opcionalmente, cole a descrição da vaga
+4. Inicie a análise
+5. Veja o índice de compatibilidade
+6. Identifique seus pontos fortes e pontos de melhoria
+7. Receba recomendações personalizadas
+8. Gere uma versão otimizada do currículo
+9. Copie ou baixe o resultado
 
-## 🎯 Problem
+## 🎯 Problema
 
-Many candidates submit resumes without knowing how well they match a specific job or how their resume may be interpreted by ATS systems.
+Muitos candidatos enviam seus currículos para vagas sem saber se o documento realmente está alinhado aos requisitos da oportunidade ou se apresenta uma estrutura adequada para sistemas ATS.
 
-CVMatch AI was created to provide a simple way to:
+O CVMatch AI foi desenvolvido para ajudar o candidato a:
 
-- Identify missing keywords
-- Understand compatibility with a job
-- Discover areas for improvement
-- Improve resume structure
-- Create a more ATS-friendly resume
+- Identificar palavras-chave importantes
+- Descobrir habilidades que podem estar faltando
+- Entender a compatibilidade com determinada vaga
+- Identificar pontos de melhoria
+- Melhorar a estrutura do currículo
+- Criar uma versão mais adequada para sistemas ATS
 
-## 💻 Technologies
+## 💻 Tecnologias utilizadas
 
 - React
 - TypeScript
@@ -57,56 +58,56 @@ CVMatch AI was created to provide a simple way to:
 - Vite
 - Lovable
 
-## 🎨 Design
+## 🎨 Interface
 
-The interface was designed with a modern SaaS approach, focusing on:
+A interface foi desenvolvida seguindo uma abordagem moderna de SaaS, priorizando:
 
-- Clean UI
-- Responsive design
-- Accessibility
-- Simple user experience
-- Professional visual identity
-- Career-tech aesthetics
+- Design limpo
+- Responsividade
+- Experiência do usuário
+- Facilidade de utilização
+- Identidade visual profissional
+- Interface voltada para tecnologia e carreira
 
-## 📱 Responsive Design
+## 📱 Responsividade
 
-The application was designed to work across:
+A aplicação foi desenvolvida para funcionar em diferentes dispositivos:
 
-- Desktop
-- Tablet
-- Mobile
+- 💻 Desktop
+- 📱 Celular
+- 📲 Tablet
 
-## 🔐 Privacy
+## 🔐 Privacidade e acesso
 
-CVMatch AI does not require users to create an account or provide personal information to use the core experience.
+O CVMatch AI não exige cadastro ou login para utilizar suas principais funcionalidades.
 
-Users can start analyzing their resume immediately.
+O usuário pode acessar a plataforma e iniciar uma análise imediatamente.
 
-## ⚠️ Disclaimer
+## ⚠️ Aviso
 
-CVMatch AI provides resume analysis and recommendations but does not guarantee interviews, job offers, or employment.
+O CVMatch AI fornece análises e recomendações para melhoria do currículo, mas não garante entrevistas, processos seletivos ou contratação.
 
-Users should only include skills, experiences, certifications, and qualifications that accurately represent their real background.
+As informações adicionadas ao currículo devem representar fielmente as experiências, habilidades, formações e qualificações reais do candidato.
 
-## 📚 Project Purpose
+## 📚 Objetivo do projeto
 
-This project was developed as part of my software development portfolio to practice:
+Este projeto foi desenvolvido como parte do meu portfólio de desenvolvimento de software, com o objetivo de praticar e demonstrar conhecimentos em:
 
-- Front-end development
+- Desenvolvimento Front-end
 - React
 - TypeScript
-- Responsive web design
-- SaaS product development
-- User experience design
-- AI-powered product concepts
+- Design responsivo
+- Desenvolvimento de aplicações SaaS
+- Experiência do usuário (UX)
+- Desenvolvimento de produtos digitais
+- Integração e utilização de ferramentas de inteligência artificial
 
-## 👨‍💻 Author
+## 👨‍💻 Desenvolvedor
 
-Rafael Bernal
+**Rafael Bernal**
 
-GitHub:
-https://github.com/rafael-bernal
+🔗 GitHub: https://github.com/rafael-bernal
 
 ---
 
-⭐ If you found this project interesting, feel free to explore the code and try the live application.
+⭐ Se você gostou do projeto, fique à vontade para explorar o código e testar a aplicação.

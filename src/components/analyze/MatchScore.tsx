@@ -4,11 +4,11 @@ import { ScoreRing } from "./ScoreRing";
 import { StatTile } from "./StatTile";
 
 function verdict(score: number, hasJob: boolean) {
-  if (!hasJob) return "Overall resume quality based on structure, clarity and skill signals";
-  if (score >= 85) return "Strong match with this position";
-  if (score >= 70) return "Good match — a few gaps to close";
-  if (score >= 55) return "Partial match — meaningful gaps to address";
-  return "Weak match — significant repositioning needed";
+  if (!hasJob) return "Qualidade geral do currículo com base em estrutura, clareza e habilidades";
+  if (score >= 85) return "Ótima compatibilidade com esta vaga";
+  if (score >= 70) return "Boa compatibilidade — algumas lacunas a resolver";
+  if (score >= 55) return "Compatibilidade parcial — lacunas relevantes a resolver";
+  return "Baixa compatibilidade — reposicionamento significativo necessário";
 }
 
 export function MatchScore({ result }: { result: AnalysisResult }) {
@@ -17,7 +17,7 @@ export function MatchScore({ result }: { result: AnalysisResult }) {
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[auto_1fr]">
         <div className="mx-auto">
           <h2 className="mb-5 text-center font-display text-lg font-semibold lg:text-left">
-            {result.hasJob ? "Resume Match Score" : "Resume Score"}
+            {result.hasJob ? "Pontuação de Compatibilidade do Currículo" : "Pontuação do Currículo"}
           </h2>
           <ScoreRing
             value={result.matchScore}
@@ -27,10 +27,10 @@ export function MatchScore({ result }: { result: AnalysisResult }) {
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          <StatTile label="ATS Score" value={`${result.atsScore}%`} />
-          <StatTile label="Job Match" value={result.hasJob ? `${result.matchScore}%` : "—"} />
+          <StatTile label="Pontuação ATS" value={`${result.atsScore}%`} />
+          <StatTile label="Compatibilidade" value={result.hasJob ? `${result.matchScore}%` : "—"} />
           <StatTile
-            label="Keywords"
+            label="Palavras-chave"
             value={
               result.hasJob
                 ? `${result.keywordsFound.length} / ${result.keywordsFound.length + result.keywordsMissing.length}`
@@ -38,15 +38,15 @@ export function MatchScore({ result }: { result: AnalysisResult }) {
             }
           />
           <StatTile
-            label="Requirements Met"
+            label="Requisitos Atendidos"
             value={result.hasJob ? `${result.requirementsMet} / ${result.requirementsTotal}` : "—"}
           />
-          <StatTile label="Improvements" value={String(result.improvements.length)} tone="warning" />
+          <StatTile label="Melhorias" value={String(result.improvements.length)} tone="warning" />
         </div>
       </div>
 
       <div className="mt-9 border-t border-border pt-7">
-        <h3 className="font-display text-lg font-semibold">Why this score?</h3>
+        <h3 className="font-display text-lg font-semibold">Por que essa pontuação?</h3>
         <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {result.breakdown.map((b, i) => (
             <ProgressRow key={b.label} label={b.label} value={b.value} delay={i * 80} />

@@ -1,19 +1,19 @@
 const steps = [
   {
     n: "01",
-    title: "Paste Your Resume",
-    body: "Paste your resume directly into the platform. No upload and no account required.",
+    title: "Cole Seu Currículo",
+    body: "Cole seu currículo diretamente na plataforma. Sem upload e sem necessidade de conta.",
   },
-  { n: "02", title: "Choose Your Analysis", body: "Choose exactly what you want to analyze." },
+  { n: "02", title: "Escolha Sua Análise", body: "Escolha exatamente o que você quer analisar." },
   {
     n: "03",
-    title: "Add a Job Description",
-    body: "Optionally paste the job description you want to apply for.",
+    title: "Adicione uma Descrição de Vaga",
+    body: "Opcionalmente, cole a descrição da vaga para a qual deseja se candidatar.",
   },
   {
     n: "04",
-    title: "Improve Your Resume",
-    body: "Receive personalized recommendations and generate an optimized version.",
+    title: "Melhore Seu Currículo",
+    body: "Receba recomendações personalizadas e gere uma versão otimizada.",
   },
 ];
 
@@ -21,9 +21,9 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" className="scroll-mt-20 border-t border-border bg-surface py-20 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">How it works</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Como funciona</p>
         <h2 className="mt-3 max-w-2xl text-balance-tight text-3xl font-bold sm:text-4xl">
-          From resume to optimized application in minutes.
+          Do currículo à candidatura otimizada em minutos.
         </h2>
 
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

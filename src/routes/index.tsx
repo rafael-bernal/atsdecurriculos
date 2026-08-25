@@ -9,9 +9,9 @@ import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Navbar } from "@/components/landing/Navbar";
 import { Pricing } from "@/components/landing/Pricing";
 
-const title = "CVMatch AI — AI Resume Analysis & ATS Match Score";
+const title = "CVMatch AI — Análise de Currículo com IA e Pontuação de Compatibilidade ATS";
 const description =
-  "Analyze your resume with AI, check ATS compatibility, compare it against any job description and generate an optimized resume. No sign-up required.";
+  "Analise seu currículo com IA, verifique a compatibilidade com ATS, compare-o com qualquer descrição de vaga e gere um currículo otimizado. Sem necessidade de cadastro."
 
 export const Route = createFileRoute("/")({
   head: () => ({

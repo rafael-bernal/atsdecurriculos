@@ -16,9 +16,9 @@ export function OptimizedResume({
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.success("Optimized resume copied to your clipboard");
+      toast.success("Currículo otimizado copiado para a área de transferência");
     } catch {
-      toast.error("Your browser blocked clipboard access");
+      toast.error("Seu navegador bloqueou o acesso à área de transferência");
     }
   };
 
@@ -27,33 +27,33 @@ export function OptimizedResume({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "cvmatch-optimized-resume.txt";
+    a.download = "curriculo-otimizado.txt";
     a.click();
     URL.revokeObjectURL(url);
-    toast.success("Download started");
+    toast.success("Download iniciado");
   };
 
   return (
     <section className="card-surface p-6 sm:p-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 className="font-display text-xl font-semibold">Your Optimized Resume</h2>
+          <h2 className="font-display text-xl font-semibold">Seu Currículo Otimizado</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            ATS-friendly, restructured and tightened — using only your own information.
+            Compatível com ATS, reestruturado e aprimorado — usando apenas suas próprias informações.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Button size="sm" className="rounded-full" onClick={copy}>
             <Copy className="size-4" />
-            Copy Resume
+            Copiar Currículo
           </Button>
           <Button size="sm" variant="outline" className="rounded-full" onClick={download}>
             <Download className="size-4" />
-            Download Resume
+            Baixar Currículo
           </Button>
           <Button size="sm" variant="ghost" className="rounded-full" onClick={onRegenerate}>
             <RefreshCw className="size-4" />
-            Generate Another Version
+            Gerar Outra Versão
           </Button>
         </div>
       </div>
@@ -77,8 +77,8 @@ export function OptimizedResume({
 
       <p className="mt-5 flex gap-2.5 text-xs leading-relaxed text-muted-foreground">
         <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" />
-        Wording, structure and clarity were improved. No companies, roles, dates, skills,
-        certifications or achievements were added or changed.
+        A redação, a estrutura e a clareza foram aprimoradas. Nenhuma empresa, cargo, data,
+        habilidade, certificação ou conquista foi adicionada ou alterada.
       </p>
     </section>
   );

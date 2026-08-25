@@ -19,32 +19,33 @@ function Tag({ label, missing }: { label: string; missing?: boolean }) {
 export function KeywordAnalysis({ result }: { result: AnalysisResult }) {
   return (
     <section className="card-surface p-6 sm:p-8">
-      <h2 className="font-display text-xl font-semibold">Keyword Analysis</h2>
+      <h2 className="font-display text-xl font-semibold">Análise de Palavras-chave</h2>
 
       <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div>
-          <h3 className="text-sm font-semibold">Found in Your Resume</h3>
+          <h3 className="text-sm font-semibold">Encontradas no seu currículo</h3>
           <div className="mt-3 flex flex-wrap gap-2">
             {result.keywordsFound.length ? (
               result.keywordsFound.map((k) => <Tag key={k} label={k} />)
             ) : (
               <p className="text-sm text-muted-foreground">
-                No widely-indexed keywords were detected. Consider adding a clear skills section.
+                Nenhuma palavra-chave amplamente indexada foi detectada. Considere adicionar uma
+                seção clara de habilidades.
               </p>
             )}
           </div>
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold">Missing From Your Resume</h3>
+          <h3 className="text-sm font-semibold">Ausentes no seu currículo</h3>
           <div className="mt-3 flex flex-wrap gap-2">
             {result.keywordsMissing.length ? (
               result.keywordsMissing.map((k) => <Tag key={k} label={k} missing />)
             ) : (
               <p className="text-sm text-muted-foreground">
                 {result.hasJob
-                  ? "Nothing significant is missing — your vocabulary covers this posting well."
-                  : "Add a job description to see which keywords a specific role expects."}
+                  ? "Nada significativo está faltando — seu vocabulário cobre bem esta vaga."
+                  : "Adicione uma descrição de vaga para ver quais palavras-chave uma função específica exige."}
               </p>
             )}
           </div>
@@ -52,12 +53,12 @@ export function KeywordAnalysis({ result }: { result: AnalysisResult }) {
       </div>
 
       <p className="mt-7 text-sm leading-relaxed text-muted-foreground">
-        These keywords appear relevant to the job description but are not clearly represented in
-        your resume.
+        Essas palavras-chave parecem relevantes para a descrição da vaga, mas não estão claramente
+        representadas no seu currículo.
       </p>
       <p className="mt-3 flex gap-2.5 rounded-xl border border-warning/30 bg-warning/10 p-4 text-sm text-foreground">
         <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" />
-        Only add keywords that accurately reflect your real experience and skills.
+        Adicione apenas palavras-chave que reflitam com precisão sua real experiência e habilidades.
       </p>
     </section>
   );

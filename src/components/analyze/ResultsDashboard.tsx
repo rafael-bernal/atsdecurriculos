@@ -42,23 +42,23 @@ export function ResultsDashboard({
 
       <section className="card-surface flex flex-wrap items-center justify-between gap-4 p-6">
         <div>
-          <h2 className="font-display text-base font-semibold">Keep going</h2>
+          <h2 className="font-display text-base font-semibold">Continue avançando</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Everything stays in this browser session. No account needed.
+            Tudo permanece nesta sessão do navegador. Nenhuma conta é necessária.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" size="sm" className="rounded-full" onClick={onEditResume}>
             <FileEdit className="size-4" />
-            Edit Resume
+            Editar Currículo
           </Button>
           <Button variant="outline" size="sm" className="rounded-full" onClick={onNewJob}>
             <Target className="size-4" />
-            Analyze Another Job
+            Analisar Outra Vaga
           </Button>
           <Button variant="ghost" size="sm" className="rounded-full" onClick={onRestart}>
             <RotateCcw className="size-4" />
-            Start Over
+            Começar de Novo
           </Button>
         </div>
       </section>

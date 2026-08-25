@@ -34,22 +34,27 @@ const SKILL_DICTIONARY = [
 ];
 
 const SECTION_HINTS: Record<string, RegExp> = {
-  "Professional Summary": /^(professional\s+)?(summary|profile|objective|about( me)?|resumo|perfil)\b/i,
-  "Professional Experience":
-    /^(professional\s+|work\s+)?(experience|employment|history|career|experiência|experiencia)\b/i,
-  "Technical Skills": /^(technical\s+)?(skills|competenc(ies|es)|technologies|stack|tools|habilidades)\b/i,
-  Education: /^(education|academic|degrees?|formação|formacao)\b/i,
-  Certifications: /^(certifications?|licenses?|courses?|training|certificações)\b/i,
-  "Additional Information": /^(additional|other|languages|interests|volunteer|projects|awards)\b/i,
+  "Resumo Profissional":
+    /^(professional\s+)?(summary|profile|objective|about( me)?|resumo|perfil|objetivo|sobre)\b/i,
+  "Experiência Profissional":
+    /^(professional\s+|work\s+)?(experience|employment|history|career|experiência|experiencia|atuação|atuacao|carreira|histórico)\b/i,
+  "Competências Técnicas":
+    /^(technical\s+)?(skills|competenc(ies|es)|technologies|stack|tools|habilidades|competências|competencias|conhecimentos|ferramentas|tecnologias)\b/i,
+  "Formação Acadêmica": /^(education|academic|degrees?|formação|formacao|escolaridade|educação|educacao)\b/i,
+  "Certificações": /^(certifications?|licenses?|courses?|training|certificações|certificacoes|cursos)\b/i,
+  "Informações Adicionais":
+    /^(additional|other|languages|interests|volunteer|projects|awards|idiomas|informações|informacoes|projetos|outros|prêmios|premios)\b/i,
 };
 
 const ACTION_VERBS = [
-  "led","built","designed","delivered","launched","improved","reduced","increased","implemented","migrated",
-  "automated","owned","scaled","optimized","managed","created","developed","coordinated","negotiated","mentored",
+  "liderei","construí","desenhei","entreguei","lancei","melhorei","reduzi","aumentei","implementei","migrei",
+  "automatizei","gerenciei","escalei","otimizei","criei","desenvolvi","coordenei","negociei","mentorei","estruturei",
 ];
 
 const WEAK_PHRASES = [
   "responsible for","in charge of","duties included","worked on","helped with","participated in","tasked with",
+  "responsável por","responsavel por","encarregado de","atividades incluíam","atividades incluiam","trabalhei em",
+  "ajudei com","ajudei na","participei de","participei do","auxiliei em","auxiliei na","fui responsável",
 ];
 
 const clamp = (n: number, min = 12, max = 99) => Math.max(min, Math.min(max, Math.round(n)));
@@ -96,7 +101,7 @@ interface ParsedResume {
 function parseResume(resume: string): ParsedResume {
   const lines = resume.split(/\n/).map((l) => l.replace(/\s+$/, ""));
   const sections: Record<string, string[]> = {};
-  let current = "Additional Information";
+  let current = "Informações Adicionais";
   for (const raw of lines) {
     const line = raw.trim();
     if (!line) continue;
@@ -117,7 +122,10 @@ function parseResume(resume: string): ParsedResume {
     lines: lines.filter((l) => l.trim().length > 0),
     bullets,
     sections,
-    hasNumbers: /\b\d+([.,]\d+)?\s*(%|k|m|\+|customers|users|clients|hours|projects|people|r\$|\$|€)/i.test(resume),
+    hasNumbers:
+      /\b\d+([.,]\d+)?\s*(%|k|m|mil|milhões|milhoes|\+|customers|users|clients|hours|projects|people|clientes|usuários|usuarios|horas|projetos|pessoas|r\$|\$|€)/i.test(
+        resume,
+      ),
     weakLines: lines.filter((l) => WEAK_PHRASES.some((p) => body && l.toLowerCase().includes(p))).slice(0, 4),
     wordCount: resume.trim().split(/\s+/).filter(Boolean).length,
     emailOrPhone: /@/.test(resume) || /\+?\d[\d\s().-]{7,}/.test(resume),
@@ -175,25 +183,25 @@ export function analyzeResume(input: {
     : clamp(45 + resumeSkills.length * 4);
 
   const atsBreakdown = [
-    { label: "Structure", value: structure },
-    { label: "Keywords", value: keywordScore },
-    { label: "Readability", value: readability },
-    { label: "Formatting", value: formatting },
-    { label: "Section Organization", value: organization },
+    { label: "Estrutura", value: structure },
+    { label: "Palavras-chave", value: keywordScore },
+    { label: "Legibilidade", value: readability },
+    { label: "Formatação", value: formatting },
+    { label: "Organização das seções", value: organization },
   ];
   const atsScore = clamp(atsBreakdown.reduce((a, b) => a + b.value, 0) / atsBreakdown.length);
 
-  const experienceLines = parsed.sections["Professional Experience"]?.length ?? 0;
+  const experienceLines = parsed.sections["Experiência Profissional"]?.length ?? 0;
   const experience = clamp(48 + experienceLines * 5 + (parsed.hasNumbers ? 14 : 0));
   const technical = clamp(40 + resumeSkills.length * 5 + (hasJob ? (found.length / Math.max(jdSkills.length, 1)) * 25 : 15));
-  const education = clamp((parsed.sections["Education"]?.length ?? 0) > 0 ? 88 + sectionCount : 55);
+  const education = clamp((parsed.sections["Formação Acadêmica"]?.length ?? 0) > 0 ? 88 + sectionCount : 55);
 
   const breakdown = [
-    { label: "Experience", value: experience },
-    { label: "Technical Skills", value: technical },
-    { label: "Keywords", value: keywordScore },
-    { label: "Education", value: education },
-    { label: "ATS Structure", value: structure },
+    { label: "Experiência", value: experience },
+    { label: "Competências técnicas", value: technical },
+    { label: "Palavras-chave", value: keywordScore },
+    { label: "Formação", value: education },
+    { label: "Estrutura ATS", value: structure },
   ];
 
   const matchScore = hasJob
@@ -206,140 +214,155 @@ export function analyzeResume(input: {
       )
     : atsScore;
 
-  // Strengths — only claims backed by the pasted text
+  // Pontos fortes — apenas afirmações sustentadas pelo texto colado
   const strengths: Strength[] = [];
   if (experienceLines > 3)
     strengths.push({
-      title: "Clear experience section",
-      detail: `Your resume presents ${experienceLines} lines of professional experience in a dedicated section, which reads well for both recruiters and parsers.`,
+      title: "Seção de experiência bem definida",
+      detail: `Seu currículo apresenta ${experienceLines} linhas de experiência profissional em uma seção dedicada, o que funciona bem tanto para recrutadores quanto para sistemas de leitura.`,
     });
   if (found.length > 0)
     strengths.push({
-      title: hasJob ? "Relevant terminology already present" : "Recognisable skill vocabulary",
-      detail: `Terms such as ${found.slice(0, 4).map(titleCase).join(", ")} appear in your resume and are commonly indexed by ATS engines.`,
+      title: hasJob ? "Terminologia relevante já presente" : "Vocabulário de competências reconhecível",
+      detail: `Termos como ${found.slice(0, 4).map(titleCase).join(", ")} aparecem no seu currículo e são comumente indexados por sistemas ATS.`,
     });
   if (parsed.hasNumbers)
     strengths.push({
-      title: "Some achievements are quantified",
-      detail: "Numbers and measurable outcomes appear in your text — this is what differentiates strong resumes from task lists.",
+      title: "Algumas conquistas estão quantificadas",
+      detail:
+        "Números e resultados mensuráveis aparecem no seu texto — é isso que diferencia currículos fortes de listas de tarefas.",
     });
-  if ((parsed.sections["Education"]?.length ?? 0) > 0)
+  if ((parsed.sections["Formação Acadêmica"]?.length ?? 0) > 0)
     strengths.push({
-      title: "Education is clearly stated",
-      detail: "A dedicated education section makes it easy for screening systems to extract your academic background.",
+      title: "Formação claramente informada",
+      detail:
+        "Uma seção dedicada à formação facilita que os sistemas de triagem extraiam seu histórico acadêmico.",
     });
   if (parsed.bullets.length > 4)
     strengths.push({
-      title: "Scannable bullet structure",
-      detail: `${parsed.bullets.length} bullet points keep the document readable in the six seconds a recruiter usually spends on a first pass.`,
+      title: "Estrutura em tópicos fácil de escanear",
+      detail: `${parsed.bullets.length} tópicos mantêm o documento legível nos poucos segundos que um recrutador costuma dedicar à primeira leitura.`,
     });
   if (strengths.length === 0)
     strengths.push({
-      title: "Solid starting point",
-      detail: "Your resume contains the raw material needed for a strong application — the improvements below focus on structure and relevance.",
+      title: "Bom ponto de partida",
+      detail:
+        "Seu currículo já contém a matéria-prima necessária para uma boa candidatura — as melhorias abaixo focam em estrutura e relevância.",
     });
 
-  // Improvements
+  // Melhorias
   const improvements: Improvement[] = [];
   if (missing.length > 0)
     improvements.push({
       priority: "high",
-      title: `Address ${missing.slice(0, 3).map(titleCase).join(", ")}`,
-      detail: `The job description references ${missing.slice(0, 3).map(titleCase).join(", ")}, but your resume does not clearly demonstrate ${missing.length > 1 ? "these" : "this"}. If you have real exposure, describe it concretely. If you do not, highlight transferable experience or plan to learn it — never add a skill you do not have.`,
+      title: `Trate ${missing.slice(0, 3).map(titleCase).join(", ")}`,
+      detail: `A descrição da vaga menciona ${missing.slice(0, 3).map(titleCase).join(", ")}, mas seu currículo não demonstra ${missing.length > 1 ? "esses pontos" : "esse ponto"} com clareza. Se você tem experiência real, descreva-a de forma concreta. Se não tem, destaque experiências transferíveis ou planeje aprender — nunca adicione uma competência que você não possui.`,
     });
   if (!parsed.hasNumbers)
     improvements.push({
       priority: "high",
-      title: "Quantify your achievements",
-      detail: "No measurable results were detected. Replace generic responsibilities with volumes, percentages, timelines or budgets you genuinely delivered.",
+      title: "Quantifique suas conquistas",
+      detail:
+        "Nenhum resultado mensurável foi detectado. Substitua responsabilidades genéricas por volumes, percentuais, prazos ou orçamentos que você realmente entregou.",
     });
   if (parsed.weakLines.length > 0)
     improvements.push({
       priority: "medium",
-      title: "Replace passive responsibility phrasing",
-      detail: `Phrases like "${(parsed.weakLines[0] ?? "").trim().slice(0, 70)}" describe duties rather than impact. Start with an action verb such as ${ACTION_VERBS.slice(0, 4).join(", ")}.`,
+      title: "Substitua frases passivas de responsabilidade",
+      detail: `Frases como "${(parsed.weakLines[0] ?? "").trim().slice(0, 70)}" descrevem tarefas em vez de impacto. Comece com um verbo de ação como ${ACTION_VERBS.slice(0, 4).join(", ")}.`,
     });
-  if ((parsed.sections["Professional Summary"]?.length ?? 0) === 0)
+  if ((parsed.sections["Resumo Profissional"]?.length ?? 0) === 0)
     improvements.push({
       priority: "medium",
-      title: "Add a targeted professional summary",
-      detail: "A three-line summary at the top gives both ATS and recruiters immediate context about your level and focus.",
+      title: "Inclua um resumo profissional direcionado",
+      detail:
+        "Um resumo de três linhas no topo dá ao ATS e ao recrutador contexto imediato sobre seu nível e seu foco.",
     });
-  if ((parsed.sections["Technical Skills"]?.length ?? 0) === 0)
+  if ((parsed.sections["Competências Técnicas"]?.length ?? 0) === 0)
     improvements.push({
       priority: "medium",
-      title: "Create a dedicated skills section",
-      detail: "Grouping tools and technologies in one labelled block improves keyword extraction accuracy.",
+      title: "Crie uma seção dedicada de competências",
+      detail:
+        "Agrupar ferramentas e tecnologias em um bloco identificado melhora a precisão da extração de palavras-chave.",
     });
   if (parsed.wordCount > 900)
     improvements.push({
       priority: "low",
-      title: "Tighten the length",
-      detail: `Your resume is around ${parsed.wordCount} words. Trimming older or less relevant detail keeps attention on what matters for this role.`,
+      title: "Reduza o tamanho do texto",
+      detail: `Seu currículo tem cerca de ${parsed.wordCount} palavras. Cortar detalhes antigos ou menos relevantes mantém a atenção no que importa para esta vaga.`,
     });
   if (parsed.bullets.length < 4)
     improvements.push({
       priority: "low",
-      title: "Use bullet points for responsibilities",
-      detail: "Dense paragraphs are harder to parse. Break experience into short, single-idea bullets.",
+      title: "Use tópicos para as responsabilidades",
+      detail:
+        "Parágrafos densos são mais difíceis de interpretar. Divida a experiência em tópicos curtos, com uma ideia cada.",
     });
   if (improvements.length === 0)
     improvements.push({
       priority: "low",
-      title: "Refine wording for this specific role",
-      detail: "Your resume is structurally sound. Focus on mirroring the language of each job description you apply to.",
+      title: "Ajuste a linguagem para esta vaga específica",
+      detail:
+        "Seu currículo está estruturalmente sólido. Foque em espelhar a linguagem de cada descrição de vaga para a qual se candidatar.",
     });
 
-  // Recommendations
+  // Recomendações
   const recommendations: Recommendation[] = [];
   if (parsed.weakLines.length > 0) {
     const line = (parsed.weakLines[0] ?? "").replace(/^[\s•\-*·–—]+/, "").trim();
     recommendations.push({
       id: "rec-impact",
-      category: "Experience",
+      category: "Experiência",
       priority: "high",
-      problem: "Quantify your achievements",
-      why: "Recruiters compare candidates on outcomes. Duty-based phrasing makes strong experience look ordinary.",
+      problem: "Quantifique suas conquistas",
+      why: "Recrutadores comparam candidatos por resultados. Frases focadas em tarefas fazem uma boa experiência parecer comum.",
       current: line,
-      suggested: `${line.replace(/^(responsible for|in charge of|worked on|helped with|participated in|tasked with|duties included)\s*/i, (m) => "").replace(/^./, (c) => c.toUpperCase())} — add the scale you handled (volume, frequency, budget or result) so the impact is visible.`,
+      suggested: `${line
+        .replace(
+          /^(responsible for|in charge of|worked on|helped with|participated in|tasked with|duties included|responsável por|responsavel por|encarregado de|trabalhei em|ajudei com|participei de|auxiliei em)\s*/i,
+          () => "",
+        )
+        .replace(/^./, (c) => c.toUpperCase())} — informe a escala envolvida (volume, frequência, orçamento ou resultado) para tornar o impacto visível.`,
     });
   }
   if (missing.length > 0) {
     recommendations.push({
       id: "rec-gap",
-      category: "Keywords",
+      category: "Palavras-chave",
       priority: "high",
-      problem: `${titleCase(missing[0] ?? "")} is requested but not represented`,
-      why: "ATS ranking is heavily keyword-driven, and a recruiter scanning for this term will not find it.",
-      suggested: `If you have genuinely used ${titleCase(missing[0] ?? "")}, name it explicitly in the context where you used it. If you have not, describe the closest adjacent experience honestly and consider a short course before applying.`,
+      problem: `${titleCase(missing[0] ?? "")} é solicitado, mas não aparece`,
+      why: "O ranqueamento do ATS é fortemente baseado em palavras-chave, e o recrutador que buscar esse termo não vai encontrá-lo.",
+      suggested: `Se você realmente já usou ${titleCase(missing[0] ?? "")}, cite explicitamente no contexto em que utilizou. Se não usou, descreva com honestidade a experiência mais próxima e considere um curso curto antes de se candidatar.`,
     });
   }
-  if ((parsed.sections["Professional Summary"]?.length ?? 0) === 0) {
+  if ((parsed.sections["Resumo Profissional"]?.length ?? 0) === 0) {
     recommendations.push({
       id: "rec-summary",
-      category: "Positioning",
+      category: "Posicionamento",
       priority: "medium",
-      problem: "Missing professional summary",
-      why: "The top third of a resume decides whether the rest gets read.",
-      suggested: "Open with two or three lines stating your role, years of experience and main area of impact — using only facts already present in your resume.",
+      problem: "Resumo profissional ausente",
+      why: "O primeiro terço do currículo decide se o restante será lido.",
+      suggested:
+        "Comece com duas ou três linhas informando seu cargo, anos de experiência e principal área de impacto — usando apenas fatos que já estão no seu currículo.",
     });
   }
   recommendations.push({
     id: "rec-structure",
-    category: "ATS Structure",
-    priority: (parsed.sections["Technical Skills"]?.length ?? 0) === 0 ? "medium" : "low",
-    problem: "Standardise section headings",
-    why: "Parsers map content using conventional headings. Creative labels can cause whole blocks to be dropped.",
-    suggested: 'Use plain headings: "Professional Summary", "Professional Experience", "Technical Skills", "Education", "Certifications".',
+    category: "Estrutura ATS",
+    priority: (parsed.sections["Competências Técnicas"]?.length ?? 0) === 0 ? "medium" : "low",
+    problem: "Padronize os títulos das seções",
+    why: "Os sistemas mapeiam o conteúdo por títulos convencionais. Nomes criativos podem fazer blocos inteiros serem ignorados.",
+    suggested:
+      'Use títulos simples: "Resumo Profissional", "Experiência Profissional", "Competências Técnicas", "Formação Acadêmica", "Certificações".',
   });
   if (hasJob) {
     recommendations.push({
       id: "rec-tailor",
-      category: "Job Match",
+      category: "Compatibilidade com a vaga",
       priority: "medium",
-      problem: "Mirror the job's language",
-      why: "Matching the exact vocabulary of the posting raises both ATS ranking and recruiter recognition.",
-      suggested: `Where accurate, use the posting's own wording for concepts you already demonstrate${found.length ? ` — for example ${found.slice(0, 3).map(titleCase).join(", ")}` : ""}.`,
+      problem: "Espelhe a linguagem da vaga",
+      why: "Usar o vocabulário exato do anúncio aumenta tanto o ranqueamento no ATS quanto o reconhecimento pelo recrutador.",
+      suggested: `Quando for verdadeiro, use as próprias palavras do anúncio para conceitos que você já demonstra${found.length ? ` — por exemplo ${found.slice(0, 3).map(titleCase).join(", ")}` : ""}.`,
     });
   }
 
@@ -347,26 +370,26 @@ export function analyzeResume(input: {
 
   const insights = [
     {
-      title: "Skills worth developing",
+      title: "Competências que vale desenvolver",
       detail: missing.length
-        ? `Based on this posting, ${missing.slice(0, 4).map(titleCase).join(", ")} would most directly increase your match rate.`
-        : `Deepening the tools you already list${resumeSkills.length ? ` (${resumeSkills.slice(0, 3).map(titleCase).join(", ")})` : ""} and adding measurable outcomes is the fastest way to strengthen your profile.`,
+        ? `Com base neste anúncio, ${missing.slice(0, 4).map(titleCase).join(", ")} aumentariam de forma mais direta sua compatibilidade.`
+        : `Aprofundar as ferramentas que você já lista${resumeSkills.length ? ` (${resumeSkills.slice(0, 3).map(titleCase).join(", ")})` : ""} e incluir resultados mensuráveis é o caminho mais rápido para fortalecer seu perfil.`,
     },
     {
-      title: "Suggested certifications",
+      title: "Certificações sugeridas",
       detail: missing.length
-        ? `Entry-level certifications or guided projects in ${missing.slice(0, 2).map(titleCase).join(" and ")} are a credible way to close this gap honestly.`
-        : "A recognised certification in your primary tool set can help you stand out among similar candidates.",
+        ? `Certificações introdutórias ou projetos guiados em ${missing.slice(0, 2).map(titleCase).join(" e ")} são uma forma honesta e crível de fechar essa lacuna.`
+        : "Uma certificação reconhecida no seu principal conjunto de ferramentas pode te destacar entre candidatos semelhantes.",
     },
     {
-      title: "Career direction",
-      detail: `Your resume currently reads as a ${parsed.wordCount > 600 ? "senior" : experienceLines > 6 ? "mid-level" : "early-to-mid career"} profile. Position your next applications one step ahead of that by leading with scope and ownership rather than tasks.`,
+      title: "Direção de carreira",
+      detail: `Hoje seu currículo comunica um perfil ${parsed.wordCount > 600 ? "sênior" : experienceLines > 6 ? "pleno" : "de início a meio de carreira"}. Posicione as próximas candidaturas um passo à frente disso, liderando com escopo e responsabilidade em vez de tarefas.`,
     },
     {
-      title: "Keywords to keep visible",
+      title: "Palavras-chave para manter visíveis",
       detail: found.length
-        ? `${found.slice(0, 6).map(titleCase).join(", ")} are already working for you — keep them in the summary and skills block, not only deep inside experience bullets.`
-        : "Add a compact skills block so your strongest terms appear early in the document.",
+        ? `${found.slice(0, 6).map(titleCase).join(", ")} já jogam a seu favor — mantenha esses termos no resumo e no bloco de competências, não apenas dentro dos tópicos de experiência.`
+        : "Adicione um bloco compacto de competências para que seus termos mais fortes apareçam no início do documento.",
     },
   ];
 
@@ -397,9 +420,16 @@ function polish(line: string, variant: number): string {
     [/^in charge of\s+/i, ""],
     [/^duties included\s*:?\s*/i, ""],
     [/^tasked with\s+/i, ""],
-    [/^worked on\s+/i, variant % 2 === 0 ? "Delivered " : "Contributed to "],
-    [/^helped with\s+/i, "Supported "],
-    [/^participated in\s+/i, "Contributed to "],
+    [/^worked on\s+/i, variant % 2 === 0 ? "Entreguei " : "Contribuí para "],
+    [/^helped with\s+/i, "Apoiei "],
+    [/^participated in\s+/i, "Contribuí para "],
+    [/^(fui\s+)?respons[áa]vel\s+(por|pela|pelo)\s+/i, ""],
+    [/^encarregad[oa]\s+(de|do|da)\s+/i, ""],
+    [/^atividades\s+inclu[íi]am\s*:?\s*/i, ""],
+    [/^trabalhei\s+(em|no|na|com)\s+/i, variant % 2 === 0 ? "Entreguei " : "Contribuí para "],
+    [/^ajudei\s+(com|na|no|a)\s+/i, "Apoiei "],
+    [/^auxiliei\s+(em|na|no|com)\s+/i, "Apoiei "],
+    [/^participei\s+(de|do|da|em)\s+/i, "Contribuí para "],
   ];
   for (const [re, rep] of replacements) {
     if (re.test(out)) {
@@ -418,27 +448,27 @@ function buildOptimizedResume(
   variant: number,
 ): OptimizedSection[] {
   const order = [
-    "Professional Summary",
-    "Professional Experience",
-    "Technical Skills",
-    "Education",
-    "Certifications",
-    "Additional Information",
+    "Resumo Profissional",
+    "Experiência Profissional",
+    "Competências Técnicas",
+    "Formação Acadêmica",
+    "Certificações",
+    "Informações Adicionais",
   ];
 
   const sections: OptimizedSection[] = [];
   for (const title of order) {
     let lines = (parsed.sections[title] ?? []).map((l) => polish(l, variant)).filter(Boolean);
 
-    if (title === "Professional Summary" && lines.length === 0) {
-      // Derive strictly from content already present — no invented facts.
-      const source = (parsed.sections["Additional Information"] ?? parsed.lines).filter(
+    if (title === "Resumo Profissional" && lines.length === 0) {
+      // Derivado estritamente do conteúdo já presente — sem inventar fatos.
+      const source = (parsed.sections["Informações Adicionais"] ?? parsed.lines).filter(
         (l) => l.split(/\s+/).length > 8,
       );
       if (source.length > 0) lines = [polish(source[0] ?? "", variant)];
     }
 
-    if (title === "Technical Skills" && lines.length === 0 && found.length > 0) {
+    if (title === "Competências Técnicas" && lines.length === 0 && found.length > 0) {
       lines = [found.map(titleCase).join(" · ")];
     }
 
@@ -446,7 +476,7 @@ function buildOptimizedResume(
   }
 
   if (sections.length === 0) {
-    sections.push({ title: "Professional Experience", lines: parsed.lines.map((l) => polish(l, variant)) });
+    sections.push({ title: "Experiência Profissional", lines: parsed.lines.map((l) => polish(l, variant)) });
   }
   return sections;
 }

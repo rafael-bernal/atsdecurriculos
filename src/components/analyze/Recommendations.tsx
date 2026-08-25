@@ -10,9 +10,9 @@ export function Recommendations({ result }: { result: AnalysisResult }) {
 
   return (
     <section className="card-surface p-6 sm:p-8">
-      <h2 className="font-display text-xl font-semibold">Personalized AI Recommendations</h2>
+      <h2 className="font-display text-xl font-semibold">Recomendações Personalizadas de IA</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Each suggestion rewrites what you already wrote — it never adds new facts.
+        Cada sugestão reescreve o que você já escreveu — nunca adiciona fatos novos.
       </p>
 
       <div className="mt-6 space-y-4">
@@ -37,7 +37,7 @@ export function Recommendations({ result }: { result: AnalysisResult }) {
               {r.current && (
                 <div className="mt-4 rounded-xl border border-border bg-card p-4">
                   <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Current
+                    Atual
                   </p>
                   <p className="mt-1.5 text-sm italic text-foreground">"{r.current}"</p>
                 </div>
@@ -45,7 +45,7 @@ export function Recommendations({ result }: { result: AnalysisResult }) {
 
               <div className="mt-3 rounded-xl border border-primary/25 bg-primary-soft/50 p-4">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-primary">
-                  Suggested
+                  Sugerido
                 </p>
                 <p className="mt-1.5 text-sm leading-relaxed text-foreground">{r.suggested}</p>
               </div>
@@ -57,13 +57,13 @@ export function Recommendations({ result }: { result: AnalysisResult }) {
                   className="rounded-full"
                   onClick={() => {
                     setStatus((p) => ({ ...p, [r.id]: "applied" }));
-                    toast.success("Marked as applied", {
-                      description: "Update this wording in your resume text, then re-run the analysis.",
+                    toast.success("Marcado como aplicado", {
+                      description: "Atualize esse trecho no texto do seu currículo e refaça a análise.",
                     });
                   }}
                 >
                   <Check className="size-4" />
-                  {s === "applied" ? "Applied" : "Apply Suggestion"}
+                  {s === "applied" ? "Aplicado" : "Aplicar Sugestão"}
                 </Button>
                 <Button
                   size="sm"
@@ -72,7 +72,7 @@ export function Recommendations({ result }: { result: AnalysisResult }) {
                   onClick={() => setStatus((p) => ({ ...p, [r.id]: "dismissed" }))}
                 >
                   <X className="size-4" />
-                  Dismiss
+                  Descartar
                 </Button>
               </div>
             </article>

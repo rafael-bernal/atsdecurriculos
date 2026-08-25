@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const ALL_STEPS = [
-  "Analyzing your resume...",
-  "Identifying relevant skills...",
-  "Analyzing job requirements...",
-  "Comparing keywords...",
-  "Calculating compatibility...",
-  "Generating personalized recommendations...",
-  "Preparing your optimized resume...",
+  "Analisando seu currículo...",
+  "Identificando habilidades relevantes...",
+  "Analisando os requisitos da vaga...",
+  "Comparando palavras-chave...",
+  "Calculando compatibilidade...",
+  "Gerando recomendações personalizadas...",
+  "Preparando seu currículo otimizado...",
 ];
 
 export function AnalysisLoader({ hasJob, onDone }: { hasJob: boolean; onDone: () => void }) {
-  const steps = hasJob ? ALL_STEPS : ALL_STEPS.filter((s) => !/job requirements|compatibility/i.test(s));
+  const steps = hasJob ? ALL_STEPS : ALL_STEPS.filter((s) => !/vaga|compatibilidade/i.test(s));
   const [i, setI] = useState(0);
 
   useEffect(() => {
@@ -33,8 +33,8 @@ export function AnalysisLoader({ hasJob, onDone }: { hasJob: boolean; onDone: ()
 
   return (
     <section className="card-surface p-8 sm:p-10">
-      <h2 className="font-display text-xl font-semibold">Analyzing your application</h2>
-      <p className="mt-1 text-sm text-muted-foreground">This usually takes just a few seconds.</p>
+      <h2 className="font-display text-xl font-semibold">Analisando sua candidatura</h2>
+      <p className="mt-1 text-sm text-muted-foreground">Isso geralmente leva apenas alguns segundos.</p>
 
       <div className="mt-6 h-2 overflow-hidden rounded-full bg-muted">
         <div

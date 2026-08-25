@@ -46,7 +46,7 @@ export function ScoreRing({
             style={{ transition: "stroke-dashoffset 1200ms cubic-bezier(0.22,1,0.36,1)" }}
           />
         </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-2 text-center">
           <span
             className="font-display font-bold tabular-nums tracking-tight"
             style={{ fontSize: size / 3.4 }}
@@ -54,7 +54,14 @@ export function ScoreRing({
             {Math.round(shown)}%
           </span>
           {label && (
-            <span className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+            <span
+              className="mt-1 font-medium uppercase tracking-tight text-muted-foreground"
+              style={{
+                fontSize: Math.max(8.5, size / 16),
+                lineHeight: 1.15,
+                maxWidth: Math.round(size * 0.62),
+              }}
+            >
               {label}
             </span>
           )}

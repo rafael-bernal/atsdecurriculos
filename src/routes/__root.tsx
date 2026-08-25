@@ -78,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CVMatch AI — Turn your resume into a stronger candidate profile" },
+      { title: "CVMatch AI — Transforme seu currículo em uma candidatura mais forte" },
       {
         name: "description",
         content:
-          "Analyze your resume, match it against any job, and improve your application with AI — no sign-up required.",
+          "Analise seu currículo, compare com qualquer vaga e melhore sua candidatura com IA — sem cadastro.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>

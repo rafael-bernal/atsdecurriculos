@@ -71,7 +71,7 @@ function titleCase(term: string) {
   if (specials[term]) return specials[term];
   return term
     .split(" ")
-    .map((w) => (w.length <= 2 ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1)))
+    .map((w) => (w.length <= 2 ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
     .join(" ");
 }
 
@@ -108,8 +108,8 @@ function parseResume(resume: string): ParsedResume {
       sections[current] = sections[current] ?? [];
       continue;
     }
-    sections[current] = sections[current] ?? [];
-    sections[current].push(line);
+    const bucket = sections[current] ?? (sections[current] = []);
+    bucket.push(line);
   }
   const bullets = lines.filter((l) => /^[\s]*[•\-*·–—]/.test(l));
   const body = resume.toLowerCase();
@@ -257,7 +257,7 @@ export function analyzeResume(input: {
     improvements.push({
       priority: "medium",
       title: "Replace passive responsibility phrasing",
-      detail: `Phrases like "${parsed.weakLines[0].trim().slice(0, 70)}" describe duties rather than impact. Start with an action verb such as ${ACTION_VERBS.slice(0, 4).join(", ")}.`,
+      detail: `Phrases like "${(parsed.weakLines[0] ?? "").trim().slice(0, 70)}" describe duties rather than impact. Start with an action verb such as ${ACTION_VERBS.slice(0, 4).join(", ")}.`,
     });
   if ((parsed.sections["Professional Summary"]?.length ?? 0) === 0)
     improvements.push({
@@ -293,7 +293,7 @@ export function analyzeResume(input: {
   // Recommendations
   const recommendations: Recommendation[] = [];
   if (parsed.weakLines.length > 0) {
-    const line = parsed.weakLines[0].replace(/^[\s•\-*·–—]+/, "").trim();
+    const line = (parsed.weakLines[0] ?? "").replace(/^[\s•\-*·–—]+/, "").trim();
     recommendations.push({
       id: "rec-impact",
       category: "Experience",
@@ -309,9 +309,9 @@ export function analyzeResume(input: {
       id: "rec-gap",
       category: "Keywords",
       priority: "high",
-      problem: `${titleCase(missing[0])} is requested but not represented`,
+      problem: `${titleCase(missing[0] ?? "")} is requested but not represented`,
       why: "ATS ranking is heavily keyword-driven, and a recruiter scanning for this term will not find it.",
-      suggested: `If you have genuinely used ${titleCase(missing[0])}, name it explicitly in the context where you used it. If you have not, describe the closest adjacent experience honestly and consider a short course before applying.`,
+      suggested: `If you have genuinely used ${titleCase(missing[0] ?? "")}, name it explicitly in the context where you used it. If you have not, describe the closest adjacent experience honestly and consider a short course before applying.`,
     });
   }
   if ((parsed.sections["Professional Summary"]?.length ?? 0) === 0) {
@@ -408,7 +408,7 @@ function polish(line: string, variant: number): string {
     }
   }
   out = out.replace(/\s{2,}/g, " ").replace(/\s+([,.;])/g, "$1");
-  if (out.length > 1) out = out[0].toUpperCase() + out.slice(1);
+  if (out.length > 1) out = out.charAt(0).toUpperCase() + out.slice(1);
   return out;
 }
 
@@ -435,7 +435,7 @@ function buildOptimizedResume(
       const source = (parsed.sections["Additional Information"] ?? parsed.lines).filter(
         (l) => l.split(/\s+/).length > 8,
       );
-      if (source.length > 0) lines = [polish(source[0], variant)];
+      if (source.length > 0) lines = [polish(source[0] ?? "", variant)];
     }
 
     if (title === "Technical Skills" && lines.length === 0 && found.length > 0) {

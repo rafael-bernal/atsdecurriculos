@@ -96,9 +96,13 @@ export function OptimizedResume({
             <Copy className="size-4" />
             Copiar Currículo
           </Button>
+          <Button size="sm" variant="outline" className="rounded-full" onClick={downloadPdf}>
+            <FileDown className="size-4" />
+            Baixar PDF
+          </Button>
           <Button size="sm" variant="outline" className="rounded-full" onClick={download}>
             <Download className="size-4" />
-            Baixar Currículo
+            Baixar TXT
           </Button>
           <Button size="sm" variant="ghost" className="rounded-full" onClick={onRegenerate}>
             <RefreshCw className="size-4" />

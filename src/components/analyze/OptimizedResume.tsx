@@ -1,4 +1,4 @@
-import { Copy, Download, RefreshCw, ShieldCheck } from "lucide-react";
+import { Copy, Download, FileDown, RefreshCw, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { optimizedToText } from "@/lib/cvmatch/engine";
@@ -33,6 +33,55 @@ export function OptimizedResume({
     toast.success("Download iniciado");
   };
 
+  const downloadPdf = async () => {
+    try {
+      const { jsPDF } = await import("jspdf");
+      const doc = new jsPDF({ unit: "pt", format: "a4" });
+      const pageW = doc.internal.pageSize.getWidth();
+      const pageH = doc.internal.pageSize.getHeight();
+      const margin = 56;
+      const maxW = pageW - margin * 2;
+      let y = margin;
+
+      const breakPage = (needed: number) => {
+        if (y + needed > pageH - margin) {
+          doc.addPage();
+          y = margin;
+        }
+      };
+
+      for (const section of result.optimized) {
+        breakPage(46);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(11);
+        doc.setTextColor(20, 83, 45);
+        doc.text(section.title.toUpperCase(), margin, y);
+        y += 8;
+        doc.setDrawColor(200);
+        doc.line(margin, y, pageW - margin, y);
+        y += 16;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(30);
+        for (const line of section.lines) {
+          const wrapped = doc.splitTextToSize(line, maxW) as string[];
+          for (const w of wrapped) {
+            breakPage(16);
+            doc.text(w, margin, y);
+            y += 15;
+          }
+        }
+        y += 14;
+      }
+
+      doc.save("curriculo-otimizado.pdf");
+      toast.success("PDF gerado com sucesso");
+    } catch {
+      toast.error("Não foi possível gerar o PDF");
+    }
+  };
+
   return (
     <section className="card-surface p-6 sm:p-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -47,9 +96,13 @@ export function OptimizedResume({
             <Copy className="size-4" />
             Copiar Currículo
           </Button>
+          <Button size="sm" variant="outline" className="rounded-full" onClick={downloadPdf}>
+            <FileDown className="size-4" />
+            Baixar PDF
+          </Button>
           <Button size="sm" variant="outline" className="rounded-full" onClick={download}>
             <Download className="size-4" />
-            Baixar Currículo
+            Baixar TXT
           </Button>
           <Button size="sm" variant="ghost" className="rounded-full" onClick={onRegenerate}>
             <RefreshCw className="size-4" />

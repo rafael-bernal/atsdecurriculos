@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/brand/Logo";
 
 const links = [
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Features", href: "/#features" },
+  { label: "Como Funciona", href: "/#how-it-works" },
+  { label: "Recursos", href: "/#features" },
   { label: "ATS", href: "/#ats" },
-  { label: "Pricing", href: "/#pricing" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Preços", href: "/#pricing" },
+  { label: "Perguntas Frequentes", href: "/#faq" },
 ];
 
 export function Navbar() {
@@ -36,14 +36,14 @@ export function Navbar() {
 
         <div className="hidden md:block">
           <Button asChild size="sm" className="rounded-full px-5">
-            <Link to="/analyze">Analyze My Resume</Link>
+            <Link to="/analyze">Analisar Meu Currículo</Link>
           </Button>
         </div>
 
         <button
           className="inline-flex size-10 items-center justify-center rounded-lg text-foreground md:hidden"
           onClick={() => setOpen((o) => !o)}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -64,7 +64,7 @@ export function Navbar() {
             ))}
             <Button asChild className="mt-3 w-full rounded-full">
               <Link to="/analyze" onClick={() => setOpen(false)}>
-                Analyze My Resume
+                Analisar Meu Currículo
               </Link>
             </Button>
           </div>

@@ -1,4 +1,4 @@
-import { Copy, Download, RefreshCw, ShieldCheck } from "lucide-react";
+import { Copy, Download, FileDown, RefreshCw, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { optimizedToText } from "@/lib/cvmatch/engine";
